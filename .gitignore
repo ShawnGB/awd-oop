@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Claude Code (don't commit to repo)
+.claude/
+
+# Environment files
+.env
+.env.local
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
