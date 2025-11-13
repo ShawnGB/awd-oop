@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import { logger } from "./src/middleware/loggerMiddleware";
 
-import { getAllMovies, getMovie, postMovie } from "./src/controller/movies";
+import { getMovies, postMovie } from "./src/controller/movies.controller";
 
 const app = express();
 const port = process.env.PORT || 3030;
@@ -14,12 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.get("/movies", getAllMovies);
-app.get("/novies/:id", getMovie);
+app.get("/movies{/:id}", getMovies);
 app.post("/movies", postMovie);
 
 const startServer = async (): Promise<void> => {

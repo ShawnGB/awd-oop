@@ -3,23 +3,20 @@ import { MovieRepository } from "../models/movies";
 
 const movieRepository = new MovieRepository();
 
-const getAllMovies = async (req: Request, res: Response): Promise<void> => {
+const getMovies = async (req: Request, res: Response): Promise<void> => {
   const movies = await movieRepository.getAll();
+  const { id } = req.params;
 
   if (!movies || movies.length === 0) {
     res.status(404).send();
     return;
   }
 
-  res.json(movies);
-};
-
-const getMovie = async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
   if (!id) {
-    res.sendStatus(400);
+    res.json(movies);
     return;
   }
+
   const movie = await movieRepository.getById(Number(id));
 
   if (!movie) {
@@ -45,4 +42,4 @@ const postMovie = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAllMovies, getMovie, postMovie };
+export { getMovies, postMovie };
